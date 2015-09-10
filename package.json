@@ -1,0 +1,39 @@
+{
+  "name": "mxd-command-init",
+  "version": "0.0.1",
+  "description": "scaffold for fxd",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/femxd/fxd-command-init.git"
+  },
+  "keywords": [
+    "fis3",
+    "init"
+  ],
+  "author": {
+    "name": "fis"
+  },
+  "license": "BSD",
+  "bugs": {
+    "url": "https://github.com/femxd/fxd-command-init/issues"
+  },
+  "homepage": "https://github.com/femxd/fxd-command-init",
+  "dependencies": {
+    "bluebird": "2.9.21",
+    "findup": "0.1.5",
+    "prompt": "*",
+    "wrench": "^1.5.8"
+  },
+  "maintainers": [
+    {
+      "name": "allanfish",
+      "email": "googleyufei@qq.com"
+    }
+  ],
+  "directories": {},
+  "readme": "ERROR: No README data found!"
+}
