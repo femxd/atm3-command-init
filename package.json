@@ -1,6 +1,6 @@
 {
-  "name": "mxd-command-init",
-  "version": "0.0.1",
+  "name": "fxd-command-init",
+  "version": "0.0.4",
   "description": "scaffold for fxd",
   "main": "index.js",
   "scripts": {
@@ -11,6 +11,7 @@
     "url": "git+https://github.com/femxd/fxd-command-init.git"
   },
   "keywords": [
+    "fxd",
     "fis3",
     "init"
   ],
