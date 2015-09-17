@@ -8,7 +8,9 @@ fis.set("atm", {
 });
 
 fis.set('project.files', ['**', '.**', '.**/**'])
-    .set('project.ignore', ['node_modules/**', '.idea/**', '.gitignore', '**/_*.scss', '.docs/**', 'publish/**', '.dist/**', '.git/**', '.svn/**', 'gruntfile.js', 'gulpfile.js', 'fis-conf.js']);
+    .set('project.ignore', ['node_modules/**', '.idea/**', '.gitignore', '**/_*.scss', '.docs/**',
+        'publish/**', '.dist/**', '.git/**', '.svn/**', 'gruntfile.js', 'gulpfile.js', 'fis-conf.js'])
+    .set("project.fileType.text", "hbs");
 
 fis.hook('relative');
 
@@ -28,10 +30,11 @@ fis.match('*', {
     _isResourceMap: false
 }).match(/.*\.(html|htm|php)$/, { //页面模板不用编译缓存
     useCache: false,
-}).match("/css/**.{css,less,scss}", {
+}).match(/\/css(?:.*\/)(.*)\.(?:css|less)/i, {
     useSprite: atmConf.useSprite,
     useDomain: atmConf.useDomain,
     useHash: atmConf.useHash,
+    spriteRelease: '/img/$1.png',
     optimizer: atmConf.useOptimize && fis.plugin('clean-css')
 }).match('/css/**.less', {
     rExt: '.css',
@@ -40,18 +43,23 @@ fis.match('*', {
     release: false
 }).match("/design/**.psd", {
     release: false
-}).match("font/**", {
+}).match("/font/**", {
     useHash: atmConf.useHash,
     useDomain: atmConf.useDomain
-}).match("img/**", {
+}).match("/img/**", {
     useDomain: atmConf.useDomain,
     useHash: atmConf.useHash
-}).match('img/**.png', {
+}).match('/img/**.png', {
     optimizer: fis.plugin('png-compressor')
-}).match('js/**', {
+}).match('/js/**', {
     useDomain: atmConf.useDomain,
     useHash: atmConf.useHash
-}).match('mail/**', {}).match('slice/**', {});
+}).match('/mail/**', {
+    useCompile: false
+}).match('/slice/**', {
+    useDomain: atmConf.useDomain,
+    useHash: atmConf.useHash
+});
 
 fis.match('**', {
     deploy: fis.plugin('local-deliver', {
@@ -86,4 +94,3 @@ fis.media('cdn').match("/css/**.{css,less}", {
         uploadUrl: 'http://super.kf0309.3g.qq.com/qm/upload'
     })
 });
-
