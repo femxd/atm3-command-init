@@ -1,17 +1,17 @@
 {
-  "name": "fxd-command-init",
+  "name": "atm-command-init",
   "version": "0.0.4",
-  "description": "scaffold for fxd",
+  "description": "scaffold for atm",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/femxd/fxd-command-init.git"
+    "url": "git+https://github.com/femxd/atm-command-init.git"
   },
   "keywords": [
-    "fxd",
+    "atm",
     "fis3",
     "init"
   ],
@@ -20,9 +20,9 @@
   },
   "license": "BSD",
   "bugs": {
-    "url": "https://github.com/femxd/fxd-command-init/issues"
+    "url": "https://github.com/femxd/atm-command-init/issues"
   },
-  "homepage": "https://github.com/femxd/fxd-command-init",
+  "homepage": "https://github.com/femxd/atm-command-init",
   "dependencies": {
     "bluebird": "2.9.21",
     "findup": "0.1.5",
