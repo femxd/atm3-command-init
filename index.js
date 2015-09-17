@@ -105,23 +105,35 @@ exports.register = function(commander) {
                     fis.log.info("mkdir %s [OK]", projectDir);
                 }
 
-                var dirs = ['css', 'design', 'font', 'html', 'img', 'js', 'mail', 'slice'];
+                copyFiles(projectDir, settings.userName, settings.projectName, settings.template);
+
+                var dirs = ['design', 'font', 'img', 'slice'];
 
                 dirs.forEach(function(dir) {
                     if (!exists(projectDir + '/' + dir))
                         mkdir(projectDir + '/' + dir);
                 });
-                fis.log.info('mkdir ', dirs, " [OK]");
+                fis.log.info('mkdir empty dirs: ', dirs, " [OK]");
 
-                copyFiles(projectDir, settings.userName, settings.projectName);
-
-                fis.log.info('Init Done!');
+                fis.log.info('init ' + settings.template + ' project done!');
             });
 
         });
 };
 
-function copyFiles(projectDir, username, projectName) {
+function copyFiles(projectDir, username, projectName, template) {
+    if (template === 'mobile') {
+        wrench.copyDirSyncRecursive(__dirname + "/templates/mobile", projectDir + '/', {
+            forceDelete: true
+        });
+    } else {
+        wrench.copyDirSyncRecursive(__dirname + "/templates/pc", projectDir + '/', {
+            forceDelete: true
+        });
+    }
+    fis.log.info("copy html, css, js files OK!");
+
+
     wrench.copyDirSyncRecursive(__dirname + "/templates/mail", projectDir + '/mail', {
         forceDelete: true
     });
