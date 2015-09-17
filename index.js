@@ -124,18 +124,21 @@ exports.register = function(commander) {
 function copyFiles(projectDir, username, projectName, template) {
     if (template === 'mobile') {
         wrench.copyDirSyncRecursive(__dirname + "/templates/mobile", projectDir + '/', {
-            forceDelete: true
+            forceDelete: false,
+            preserveFiles: true
         });
     } else {
         wrench.copyDirSyncRecursive(__dirname + "/templates/pc", projectDir + '/', {
-            forceDelete: true
+            forceDelete: false,
+            preserveFiles: true
         });
     }
     fis.log.info("copy html, css, js files OK!");
 
 
     wrench.copyDirSyncRecursive(__dirname + "/templates/mail", projectDir + '/mail', {
-        forceDelete: true
+        forceDelete: false,
+        preserveFiles: true
     });
     fis.log.info("copy mail folder [OK]");
 
