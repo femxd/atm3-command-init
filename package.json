@@ -1,6 +1,6 @@
 {
   "name": "atm3-command-init",
-  "version": "0.0.4",
+  "version": "0.0.6",
   "description": "scaffold for atm",
   "main": "index.js",
   "scripts": {
@@ -26,8 +26,7 @@
   "dependencies": {
     "bluebird": "2.9.21",
     "findup": "0.1.5",
-    "prompt": "*",
-    "wrench": "^1.5.8"
+    "prompt": "*"
   },
   "maintainers": [
     {

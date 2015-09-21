@@ -1,7 +1,6 @@
 var Promise = require('bluebird');
 var fs = require('fs');
 var path = require('path');
-var wrench = require('wrench');
 var exists = fs.existsSync;
 var write = fs.writeFileSync;
 var mkdir = fs.mkdirSync;
@@ -122,29 +121,21 @@ exports.register = function(commander) {
 };
 
 function copyFiles(projectDir, username, projectName, template) {
-    if (template === 'mobile') {
-        wrench.copyDirSyncRecursive(__dirname + "/templates/mobile", projectDir + '/', {
-            forceDelete: false,
-            preserveFiles: true
-        });
+    var isMobile = template === 'mobile';
+    if (isMobile) {
+        fis.util.copy(__dirname + "/templates/mobile", projectDir, null, null, true);
     } else {
-        wrench.copyDirSyncRecursive(__dirname + "/templates/pc", projectDir + '/', {
-            forceDelete: false,
-            preserveFiles: true
-        });
+        fis.util.copy(__dirname + "/templates/pc", projectDir, null, null, true);
     }
     fis.log.info("copy html, css, js files OK!");
 
-
-    wrench.copyDirSyncRecursive(__dirname + "/templates/mail", projectDir + '/mail', {
-        forceDelete: false,
-        preserveFiles: true
-    });
-    fis.log.info("copy mail folder [OK]");
+    //fis.util.copy(__dirname + "/templates/mail", projectDir + '/mail');
+    //fis.log.info("copy mail folder [OK]");
 
     var fisConf = fs.readFileSync(__dirname + '/templates/fis-conf.js', {encoding: 'utf8'});
-    fisConf = fisConf.replace(/userName\s*:\s*["'].*['"]/, "userName: '" + username + "'");
-    fisConf = fisConf.replace(/projectName\s*:\s*["'].*["']/, "projectName: '" + projectName + "'");
+    fisConf = fisConf.replace('__userName__', username)
+        .replace('__projectName__', projectName)
+        .replace('__scale__', isMobile ? 0.5 : 1.0);
 
     write(projectDir + "/fis-conf.js", fisConf, {encoding: 'utf8'});
     fis.log.info("generate fis-conf.js OK");

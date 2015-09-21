@@ -2,9 +2,9 @@ fis.set("atm", {
     useSprite: true, // 是否在开发阶段使用雪碧图合并
     useOptimize: false, // 是否压缩css
     useHash: false, // 是否给文件名加上hash值
-    userName: '',  // RTX用户名
-    projectName: '', // 项目名称
-    cdnPath: '' // 上传到CDN的路径
+    userName: '__userName__',  // RTX用户名
+    projectName: '__projectName__', // 项目名称
+    cdnPath: '' // 上传到CDN的路径, 类似于/2015/market/allanyu, 注意: 必须从/MIG-WEB的子目录开始
 });
 
 fis.set('project.files', ['**', '.**', '.**/**'])
@@ -70,7 +70,7 @@ fis.match('**', {
         htmlUseSprite: true,
         layout: 'matrix',
         margin: '16',
-        scale: 0.5,
+        scale: __scale__,
         styleReg: /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig
     })
 });
