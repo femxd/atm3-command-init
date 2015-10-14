@@ -4,6 +4,7 @@ fis.set("atm", {
     useHash: false, // 是否给文件名加上hash值
     userName: '__userName__',  // RTX用户名
     projectName: '__projectName__', // 项目名称
+    wapstatic: 'http://wapstatic.kf0309.3g.qq.com/', // 默认测试环境网页访问地址
     cdnPath: '' // 上传到CDN的路径, 类似于/2015/market/allanyu, 注意: 必须从/MIG-WEB的子目录开始
 });
 
@@ -72,7 +73,10 @@ fis.match('**', {
         margin: '16',
         scale: __scale__,
         styleReg: /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig
-    })
+    }),
+    postpackager: [fis.plugin('list-html'), fis.plugin('open', {
+        baseUrl: atmConf.wapstatic + atmConf.userName + '/' + atmConf.projectName
+    })]
 });
 
 fis.media('test').match("/css/**.{css,less}", {
