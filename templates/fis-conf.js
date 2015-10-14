@@ -79,18 +79,22 @@ fis.media('test').match("/css/**.{css,less}", {
     useSprite: true,
     optimizer: atmConf.useOptimize && fis.plugin('clean-css')
 }).match('**', {
-    deploy: fis.plugin('http-push', {
+    deploy: [fis.plugin('local-deliver', {
+        to: './publish'
+    }), fis.plugin('http-push', {
         receiver: 'http://ued.wsd.com/receiver/receiver2.php',
         to: '/data/wapstatic/' + atmConf.userName + '/' + atmConf.projectName
-    })
+    })]
 });
 
 fis.media('cdn').match("/css/**.{css,less}", {
     useSprite: true,
     optimizer: atmConf.useOptimize && fis.plugin('clean-css')
 }).match('**', {
-    deploy: fis.plugin('cdn', {
+    deploy: [fis.plugin('local-deliver', {
+        to: './publish'
+    }), fis.plugin('cdn', {
         remoteDir: atmConf.cdnPath,
         uploadUrl: 'http://super.kf0309.3g.qq.com/qm/upload'
-    })
+    })]
 });
