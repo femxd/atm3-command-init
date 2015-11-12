@@ -8,14 +8,14 @@ var rVariable = /\$\{([\w\.\-_]+)(?:\s+(.+?))?\}/g;
 var child_process = require('child_process');
 
 exports.name = 'init';
-exports.usage = '<mobile|pc>';
-exports.desc = 'scaffold with specifed template mobile or pc. default is mobile';
+exports.usage = '<mobile|pc|conf>';
+exports.desc = 'scaffold with specifed template mobile or pc or just update fis-conf.js file. default is mobile';
 
-exports.register = function(commander) {
+exports.register = function (commander) {
     commander
         .option('-u, --username <userName>', 'set username')
         .option('-p, --projectname <projectName>', 'set projectname')
-        .action(function(template) {
+        .action(function (template) {
             var args = [].slice.call(arguments);
             var options = args.pop();
 
@@ -26,31 +26,29 @@ exports.register = function(commander) {
             };
 
             // 根据 fis-conf.js 确定 root 目录
-            Promise.try(function() {
+            Promise.try(function () {
                 if (!settings.root) {
                     var findup = require('findup');
 
-                    return new Promise(function(resolve, reject) {
+                    return new Promise(function (resolve, reject) {
                         var fup = findup(process.cwd(), 'fis-conf.js');
                         var dir = null;
 
-                        fup.on('found', function(found) {
+                        fup.on('found', function (found) {
                             dir = found;
                             fup.stop();
                         });
 
                         fup.on('error', reject);
 
-                        fup.on('end', function() {
+                        fup.on('end', function () {
                             resolve(dir);
                         });
-                    })
-
-                        .then(function(dir) {
+                    }).then(function (dir) {
                             settings.root = dir || process.cwd();
                         });
                 }
-            }).then(function() {// prompt
+            }).then(function () {// prompt
                 fis.log.info('Current Dir: %s', settings.root);
 
                 if (settings.userName && settings.projectName) {
@@ -62,7 +60,7 @@ exports.register = function(commander) {
                         projectname: ''
                     };
 
-                    Object.keys(variables).forEach(function(key) {
+                    Object.keys(variables).forEach(function (key) {
                         schema.push({
                             name: key,
                             required: true,
@@ -74,8 +72,8 @@ exports.register = function(commander) {
                         var prompt = require('prompt');
                         prompt.start();
 
-                        return new Promise(function(resolve, reject) {
-                            prompt.get(schema, function(error, result) {
+                        return new Promise(function (resolve, reject) {
+                            prompt.get(schema, function (error, result) {
                                 if (error) {
                                     return reject(error);
                                 }
@@ -89,7 +87,7 @@ exports.register = function(commander) {
 
                     return settings;
                 }
-            }).then(function() {
+            }).then(function () {
                 fis.log.info("settings: ", settings);
                 if (!settings.userName || !settings.projectName) {
                     fis.log.error("userName and projectName is required!");
@@ -108,7 +106,7 @@ exports.register = function(commander) {
 
                 var dirs = ['design', 'font', 'img', 'slice'];
 
-                dirs.forEach(function(dir) {
+                dirs.forEach(function (dir) {
                     if (!exists(projectDir + '/' + dir))
                         mkdir(projectDir + '/' + dir);
                 });
@@ -121,16 +119,7 @@ exports.register = function(commander) {
 };
 
 function copyFiles(projectDir, username, projectName, template) {
-    var isMobile = template === 'mobile';
-    if (isMobile) {
-        fis.util.copy(__dirname + "/templates/mobile", projectDir, null, null, true);
-    } else {
-        fis.util.copy(__dirname + "/templates/pc", projectDir, null, null, true);
-    }
-    fis.log.info("copy html, css, js files OK!");
-
-    //fis.util.copy(__dirname + "/templates/mail", projectDir + '/mail');
-    //fis.log.info("copy mail folder [OK]");
+    var isMobile = template !== 'pc';
 
     var fisConf = fs.readFileSync(__dirname + '/templates/fis-conf.js', {encoding: 'utf8'});
     fisConf = fisConf.replace('__userName__', username)
@@ -139,4 +128,16 @@ function copyFiles(projectDir, username, projectName, template) {
 
     write(projectDir + "/fis-conf.js", fisConf, {encoding: 'utf8'});
     fis.log.info("generate fis-conf.js OK");
+
+    if (template !== 'mobile' && template !== 'pc') {
+        fis.log.info("just update fis-conf.js file!");
+        return false;
+    }
+
+    if (isMobile) {
+        fis.util.copy(__dirname + "/templates/mobile", projectDir, null, null, true);
+    } else {
+        fis.util.copy(__dirname + "/templates/pc", projectDir, null, null, true);
+    }
+    fis.log.info("copy html, css, js files OK!");
 }
