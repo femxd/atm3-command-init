@@ -31,7 +31,7 @@ fis.match('*', {
     _isResourceMap: false
 }).match(/.*\.(html|htm|php)$/, { //页面模板不用编译缓存
     useCache: false,
-}).match(/\/css(?:.*\/)(.*)\.(?:css|less)/i, {
+}).match(/\/css(?:.*\/)(.*)\.(?:css|less|scss)/i, {
     useSprite: atmConf.useSprite,
     useDomain: atmConf.useDomain,
     useHash: atmConf.useHash,
@@ -40,9 +40,9 @@ fis.match('*', {
 }).match('/css/**.less', {
     rExt: '.css',
     parser: fis.plugin('less')
-}).match('/css/**.scss', {
-    rExt: '.css',
-    parser: fis.plugin('node-sass')
+//}).match('/css/**.scss', {
+//    rExt: '.css',
+//    parser: fis.plugin('node-sass')
 }).match('**mixins?.{less,scss}', {
     release: false
 }).match('**mixins?/**.{less,scss}', {

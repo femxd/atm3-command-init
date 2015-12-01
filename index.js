@@ -104,15 +104,17 @@ exports.register = function (commander) {
 
                 copyFiles(projectDir, settings.userName, settings.projectName, settings.template);
 
-                var dirs = ['design', 'font', 'img', 'slice'];
+                if (settings.template === 'mobile' || settings.template === 'pc') {
+                    var dirs = ['design', 'font', 'img', 'slice'];
 
-                dirs.forEach(function (dir) {
-                    if (!exists(projectDir + '/' + dir))
-                        mkdir(projectDir + '/' + dir);
-                });
-                fis.log.info('mkdir empty dirs: ', dirs, " [OK]");
+                    dirs.forEach(function (dir) {
+                        if (!exists(projectDir + '/' + dir))
+                            mkdir(projectDir + '/' + dir);
+                    });
+                    fis.log.info('mkdir empty dirs: ', dirs, " [OK]");
 
-                fis.log.info('init ' + settings.template + ' project done!');
+                    fis.log.info('init ' + settings.template + ' project done!');
+                }
             });
 
         });
