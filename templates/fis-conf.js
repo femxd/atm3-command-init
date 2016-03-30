@@ -100,7 +100,7 @@ fis.match('**', {
         deploy: [fis.plugin('local-deliver', {
             to: './publish'
         }), fis.plugin('http-push', {
-            receiver: 'http://ued.wsd.com/receiver/receiver2.php',
+            receiver: 'http://wapstatic.kf0309.3g.qq.com/receiver/receiver2.php',
             to: '/data/wapstatic/' + atmConf.userName + '/' + atmConf.projectName
         })]
     });
