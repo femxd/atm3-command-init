@@ -101,7 +101,8 @@ fis.match('**', {
             to: './publish'
         }), fis.plugin('http-push', {
             receiver: 'http://wapstatic.kf0309.3g.qq.com/receiver/receiver2.php',
-            to: '/data/wapstatic/' + atmConf.userName + '/' + atmConf.projectName
+            to: '/data/wapstatic/' + atmConf.userName + '/' + atmConf.projectName,
+            type: 'zip'
         })]
     });
 });
