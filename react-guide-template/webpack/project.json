@@ -1,0 +1,10 @@
+{
+  "entrys": [
+    {
+      "chunk": "template",
+      "entry": "../src/entry/template.js",
+      "template": "../src/template.html",
+      "filename": "html/template.html"
+    }
+  ]
+}

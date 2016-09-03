@@ -1,0 +1,15 @@
+.babelrc
+.eslint*
+.idea
+.npmignore
+.travis.yml
+.editorconfig
+jsconfig.json
+buid/*
+node_modules/*
+test/*
+site/*
+coverage/*
+kitchensink/*
+v2r/*
+dist/*
