@@ -1,9 +1,8 @@
 const path = require('path');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
-
-// see this link for more info on what all of this means
-// https://github.com/halt-hammerzeit/webpack-isomorphic-tools
-
+const paths = {
+  src: folder => path.resolve(__dirname, "../src/", folder)
+}
 
 module.exports = {
 
@@ -14,9 +13,16 @@ module.exports = {
   // Sending SIGTERM to other processes..
   //
   // debug: true,
-  alias: {
+  alias: [
+    'components',
+    'containers',
+    'styles',
+    'images',
+    'utils',
+    'fonts',
+  ].reduce((sum, folder) => ((sum[folder] = paths.src(folder)) && sum), {
     guide: path.resolve(__dirname, "../node_modules/@tencent/react-guide/src"),
-  },
+  }),
 
   assets: {
     images: {

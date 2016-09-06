@@ -65,9 +65,12 @@ fis
     release: false
   })
   .match("font/**", {})
-  .match("img/**", {})
-  .match('img/**.png', {
-    optimizer: fis.plugin('png-compressor')
+  .match("images/**", {
+    release: true,
+  })
+  .match('images/**.png', {
+    optimizer: fis.plugin('png-compressor'),
+    release: true
   }).match('js/**', {})
   .match('mail/**', {})
   .match('slice/**', {});
@@ -84,7 +87,7 @@ fis.match('**', {
     scale: 0.5,
     styleReg: /(<style(?:(?=\s)[\s\S]*?["'\s\w\/\-]>|>))([\s\S]*?)(<\/style\s*>|$)/ig
   }),
-  postpackager: [fis.plugin('list-html'), fis.plugin('open', {
+  postpackager: [fis.plugin('open', {
     baseUrl: atmConf.wapstatic + atmConf.userName + '/' + atmConf.projectName
   })]
 });

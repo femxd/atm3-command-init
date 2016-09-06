@@ -15,7 +15,7 @@ const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
 const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack.isomorphic'));
 
 module.exports = require('./webpack.base')({
-  devtool: 'hidden-source-map',
+  // devtool: 'hidden-source-map',
 
   // In production, we skip all hot-reloading stuff
   entry: project.entrys.reduce((sum, item) => {
@@ -34,14 +34,14 @@ module.exports = require('./webpack.base')({
   cssLoaders: ExtractTextPlugin.extract(
     {
       fallbackLoader: 'style-loader?name=css/[name].[ext]',
-      loader: 'css-loader!postcss-loader'
+      loader: 'css-loader?importLoaders=2!postcss-loader'
     }
   ),
 
   sassLoaders: ExtractTextPlugin.extract(
     {
       fallbackLoader: 'style-loader?name=css/[name].[ext]',
-      loader: 'css-loader!postcss-loader!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
+      loader: 'css-loader?importLoaders=2!postcss-loader!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true'
     }
   ),
 

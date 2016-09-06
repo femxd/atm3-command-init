@@ -1,7 +1,8 @@
 const path = require('path');
 const webpack = require('webpack');
 const WebpackIsomorphicToolsPlugin = require('webpack-isomorphic-tools/plugin');
-const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(require('./webpack.isomorphic'));
+const isomorphicConfig = require('./webpack.isomorphic');
+const webpackIsomorphicToolsPlugin = new WebpackIsomorphicToolsPlugin(isomorphicConfig);
 const NODE_ENV = JSON.stringify(process.env.NODE_ENV || 'development');
 
 module.exports = (options) => ({
@@ -17,7 +18,7 @@ module.exports = (options) => ({
   }, options.output), // Merge with env dependent settings
   module: {
     loaders: [
-       {
+      {
         test: /\.js$/, // Transform all .js files required somewhere with Babel
         loader: 'babel-loader',
         include: /src|webpack/,
@@ -46,7 +47,7 @@ module.exports = (options) => ({
       },
       {
         test: webpackIsomorphicToolsPlugin.regular_expression('images'),
-        loader: 'url-loader?limit=10000&name=img/[name].[ext]',
+        loader: 'url-loader?limit=10000000&name=[name].[ext]',
       },
       {
         test: /\.woff(\?v=\d+\.\d+\.\d+)?$/,
@@ -59,6 +60,10 @@ module.exports = (options) => ({
       {
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
         loader: 'file?name=fonts/[name].[ext]&mimetype=application/octet-stream',
+      },
+      {
+        test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
+        loader: 'url-loader?name=images/[name].[ext]&limit=10000000&mimetype=image/svg+xml',
       },
       {
         test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
@@ -98,7 +103,10 @@ module.exports = (options) => ({
   ]),
   postcss: () => options.postcssPlugins,
   resolve: {
-    modules: ['src', 'node_modules'],
+    modules: [
+      path.resolve(__dirname, '../src'),
+      path.resolve(__dirname, '../node_modules')
+    ],
     extensions: [
       '',
       '.js',
@@ -110,8 +118,6 @@ module.exports = (options) => ({
       'jsnext:main',
       'main',
     ],
-    alias: {
-      guide: path.resolve(__dirname, "../node_modules/@tencent/react-guide/src"),
-    }
+    alias: isomorphicConfig.alias
   },
 });

@@ -4,7 +4,7 @@ import { render } from 'react-dom'
 
 import 'guide/commons/css-reset/index.scss'
 import 'guide/commons/css-fonticon/index.scss'
-import "../scss/g.scss"
+import "../styles/g.scss"
 
 import Header from 'guide/commons/Header'
 import Card from 'guide/commons/Card'

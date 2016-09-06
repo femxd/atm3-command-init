@@ -37,9 +37,9 @@ module.exports = require('./webpack.base')({
   },
 
   // Load the CSS in a style tag in development
-  cssLoaders: 'style-loader?name=css/[name].[ext]!css-loader!postcss-loader',
+  cssLoaders: 'style-loader?name=css/[name].[ext]!css?importLoaders=2&localIdentName=[local]___[hash:base64:5]!postcss-loader',
 
-  sassLoaders: 'style?name=css/[name].[ext]!css!postcss!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true',
+  sassLoaders: 'style?name=css/[name].[ext]!css?importLoaders=2!postcss!sass?outputStyle=expanded&sourceMap=true&sourceMapContents=true',
 
   // Process the CSS with PostCSS
   postcssPlugins: [
