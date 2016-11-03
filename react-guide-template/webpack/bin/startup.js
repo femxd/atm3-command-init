@@ -29,7 +29,7 @@ global.__PROD__ = (env === 'prod' || env === 'production');
   // https://github.com/halt-hammerzeit/webpack-isomorphic-tools
 
   global.webpackIsomorphicTools = new WebpackIsomorphicTools(require('../webpack.isomorphic'))
-    .development(__DEVELOPMENT__)
+    // .development(__DEVELOPMENT__)
     .server(rootDir, function () {
       require('../webpack-dev-server.js');
     });

@@ -6,12 +6,6 @@ const betalib1 = [
   'babel-polyfill',
   'react',
   'react-dom',
-  'react-router',
-  'history',
-  'classnames',
-  'scroll-behavior',
-  "scroll-behavior",
-  'serialize-javascript',
   'lodash',
 ]
 
@@ -43,22 +37,22 @@ module.exports = {
 
     new webpack.ContextReplacementPlugin(/moment[\/\\]locale$/, /zh-cn/),
 
-    new webpack.optimize.UglifyJsPlugin({
-      compress: {
-        sequences: true,
-        dead_code: true,
-        conditionals: true,
-        booleans: true,
-        unused: true,
-        if_return: true,
-        join_vars: true,
-        drop_console: true,
-        warnings: false,
-      },
-      verbose: true,
-      comment: true,
-      mangle: true,
-      sourceMap: false
-    }),
+    // new webpack.optimize.UglifyJsPlugin({
+    //   compress: {
+    //     sequences: true,
+    //     dead_code: true,
+    //     conditionals: true,
+    //     booleans: true,
+    //     unused: true,
+    //     if_return: true,
+    //     join_vars: true,
+    //     drop_console: true,
+    //     warnings: false,
+    //   },
+    //   verbose: true,
+    //   comment: true,
+    //   mangle: true,
+    //   sourceMap: false
+    // }),
   ],
 };

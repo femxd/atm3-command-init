@@ -21,7 +21,7 @@ module.exports = {
     'utils',
     'fonts',
   ].reduce((sum, folder) => ((sum[folder] = paths.src(folder)) && sum), {
-    guide: path.resolve(__dirname, "../node_modules/@tencent/react-guide/src"),
+    guide: path.resolve(__dirname, "../node_modules/@tencent/react-guide/"),
   }),
 
   assets: {

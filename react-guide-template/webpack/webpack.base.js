@@ -21,7 +21,7 @@ module.exports = (options) => ({
       {
         test: /\.js$/, // Transform all .js files required somewhere with Babel
         loader: 'babel-loader',
-        include: /src|webpack/,
+        include: /src|webpack|react-guide/,
         query: options.babelQuery,
       },
       {
@@ -42,7 +42,7 @@ module.exports = (options) => ({
       },
       {
         test: /\.scss$/,
-        include: /src|xiaoshuo/,
+        include: /src|react-guide/,
         loader: options.sassLoaders,
       },
       {
@@ -80,7 +80,8 @@ module.exports = (options) => ({
   },
   sassLoader: {
     includePaths: [
-      path.resolve(__dirname, "../src")
+      path.resolve(__dirname, "../src"),
+      path.resolve(__dirname, "../node_modules/@tencent/react-guide"),
     ]
   },
   plugins: options.plugins.concat([
